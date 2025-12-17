@@ -21,31 +21,31 @@ public class stock{
 public Long getid(){
   return id;
 }
-public Long setid(Long id){
+public void setid(Long id){
   this.id=id;
 }
 public String getticker(){
   return ticker;
 }
-public String setticker(String ticker){
+public void setticker(String ticker){
   this.ticker=ticker;
 }
 public String getcompanyName(){
   return companyName;
 }
-public String setcompanyName(String companyName){
+public void setcompanyName(String companyName){
   this.companyName=companyName;
 }
 public String getsector(){
   return sector;
 }
-public String setsector(String sector){
+public void setsector(String sector){
   this.sector=sector;
 }
 public Boolean getactive(){
   return active;
 }
-public Boolean setactive(Boolean active){
+public void setactive(Boolean active){
   this.active=active;
 }
 public stock(Long id , String ticker, String companyName, String sector, Boolean active){
@@ -56,7 +56,7 @@ public stock(Long id , String ticker, String companyName, String sector, Boolean
  this.active=active;
 }
 public stock(){
-  
+
 }
 
 }
