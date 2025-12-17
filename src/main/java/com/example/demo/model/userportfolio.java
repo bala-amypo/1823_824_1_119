@@ -37,16 +37,16 @@ public String getportfolioName(){
 public void setportfolioName(String portfolioName){
   this.portfolioName=portfolioName;
 }
-public String getcreatedAt(){
+public Timestamp getcreatedAt(){
   return createdAt;
 }
-public void setcreatedAt(String createdAt){
+public void setcreatedAt(Timestamp createdAt){
   this.createdAt=createdAt;
 }
-public Boolean getupdatedAt(){
+public Timestamp getupdatedAt(){
   return updatedAt;
 }
-public void setupdatedAt(Boolean updatedAt){
+public void setupdatedAt(Timestamp updatedAt){
   this.updatedAt=updatedAt;
 }
 public Boolean getactive(){
@@ -55,7 +55,7 @@ public Boolean getactive(){
 public void setactive(Boolean active){
   this.active=active;
 }
-public stock(Long id ,Long userId , String portfolioName, Timestamp createdAt , Timestamp updatedAt ,  Boolean active){
+public userportfolio(Long id ,Long userId , String portfolioName, Timestamp createdAt , Timestamp updatedAt ,  Boolean active){
  this.id=id;
  this.userId=userId;
  this.portfolioName=portfolioName;
