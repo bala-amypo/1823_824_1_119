@@ -4,6 +4,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class userportfolio{
@@ -42,17 +43,24 @@ public String getcreatedAt(){
 public void setcreatedAt(String createdAt){
   this.createdAt=createdAt;
 }
+public Boolean getupdatedAt(){
+  return updatedAt;
+}
+public void setupdatedAt(Boolean updatedAt){
+  this.updatedAt=updatedAt;
+}
 public Boolean getactive(){
   return active;
 }
 public void setactive(Boolean active){
   this.active=active;
 }
-public stock(Long id , String ticker, String companyName, String sector, Boolean active){
+public stock(Long id ,Long userId , String portfolioName, Timestamp createdAt , Timestamp updatedAt ,  Boolean active){
  this.id=id;
- this.ticker=ticker;
- this.companyName=companyName;
- this.sector=sector;
+ this.userId=userId;
+ this.portfolioName=portfolioName;
+ this.createdAt=createdAt;
+  this.updatedAt=updatedAt;
  this.active=active;
 }
 public userportfolio(){
