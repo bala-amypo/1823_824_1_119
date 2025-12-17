@@ -12,8 +12,8 @@ import jakarta.persistence.GenerationType;
 public class userportfolio{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
-    private long userId;
+    private Long id;
+    private Long userId;
     private String portfolioName;
     private  
 }
