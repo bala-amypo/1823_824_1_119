@@ -1,6 +1,9 @@
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 
 @Entity
 public class stock{
@@ -11,5 +14,5 @@ public class stock{
   private String ticker;
   private String companyName;
   private String sector;
-  private boolean active
+  private boolean active;
 }
