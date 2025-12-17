@@ -17,7 +17,7 @@ public class stock{
   private Boolean active;
 
 
-}
+
 public Long getid(){
   return id;
 }
@@ -48,5 +48,15 @@ public Boolean getactive(){
 public Boolean setactive(Boolean active){
   this.active=active;
 }
+public stock(Long id , String ticker, String companyName, String sector, Boolean active){
+ this.id=id;
+ this.ticker=ticker;
+ this.companyName=companyName;
+ this.sector=sector;
+ this.active=active;
+}
+public stock(){
+  
+}
 
-
+}
