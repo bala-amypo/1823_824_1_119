@@ -14,14 +14,14 @@ public class stock{
   private String ticker;
   private String companyName;
   private String sector;
-  private boolean active;
+  private Boolean active;
 
 
 }
-public long getid(){
+public Long getid(){
   return id;
 }
-public long setid(Long id){
+public Long setid(Long id){
   this.id=id;
 }
 public String getticker(){
@@ -33,7 +33,20 @@ public String setticker(String ticker){
 public String getcompanyName(){
   return companyName;
 }
-public String setcompanyName(){
+public String setcompanyName(String companyName){
   this.companyName=companyName;
 }
-public 
+public String getsector(){
+  return sector;
+}
+public String setsector(String sector){
+  this.sector=sector;
+}
+public Boolean getactive(){
+  return active;
+}
+public Boolean setactive(Boolean active){
+  this.active=active;
+}
+
+
