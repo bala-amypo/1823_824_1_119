@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 
 @Entity
+@Table(
+  name = ""
+)
 public class stock{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
