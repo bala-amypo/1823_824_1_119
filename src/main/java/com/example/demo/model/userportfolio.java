@@ -13,6 +13,9 @@ public class userportfolio{
   private Long userId;
   @Column(unique=true)
   private String portfolioName;
+  @PrePersist
+  private Timestamp createdAt;
+  private Timestamp updatedAt;
   private Boolean active;
 
   public Long getid(){
@@ -21,23 +24,23 @@ public class userportfolio{
 public void setid(Long id){
   this.id=id;
 }
-public String getticker(){
-  return ticker;
+public String getuserId(){
+  return userId;
 }
-public void setticker(String ticker){
-  this.ticker=ticker;
+public void setuserId(String userId){
+  this.userId=userId;
 }
-public String getcompanyName(){
-  return companyName;
+public String getportfolioName(){
+  return portfolioName;
 }
-public void setcompanyName(String companyName){
-  this.companyName=companyName;
+public void setportfolioName(String portfolioName){
+  this.portfolioName=portfolioName;
 }
-public String getsector(){
-  return sector;
+public String getcreatedAt(){
+  return createdAt;
 }
-public void setsector(String sector){
-  this.sector=sector;
+public void setcreatedAt(String createdAt){
+  this.createdAt=createdAt;
 }
 public Boolean getactive(){
   return active;
@@ -52,7 +55,7 @@ public stock(Long id , String ticker, String companyName, String sector, Boolean
  this.sector=sector;
  this.active=active;
 }
-public user(){
+public userportfolio(){
 
 }
 
