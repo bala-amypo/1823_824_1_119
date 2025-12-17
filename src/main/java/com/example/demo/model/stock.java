@@ -9,7 +9,7 @@ import jakarta.persistence.Column;
 public class stock{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private long id;
+  private Long id;
   @Column(unique=true)
   private String ticker;
   private String companyName;
@@ -18,6 +18,22 @@ public class stock{
 
 
 }
-public long getId(){
+public long getid(){
   return id;
 }
+public long setid(Long id){
+  this.id=id;
+}
+public String getticker(){
+  return ticker;
+}
+public String setticker(String ticker){
+  this.ticker=ticker;
+}
+public String getcompanyName(){
+  return companyName;
+}
+public String setcompanyName(){
+  this.companyName=companyName;
+}
+public 
