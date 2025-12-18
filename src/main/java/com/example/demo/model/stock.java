@@ -6,9 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 
 @Entity
-@Table(
-  name = ""
-)
+
 public class stock{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -17,7 +15,7 @@ public class stock{
   private String ticker;
   private String companyName;
   private String sector;
-  private Boolean active;
+  private Boolean active = true ;
 
 
 
