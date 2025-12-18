@@ -6,6 +6,8 @@ import com.example.demo.service.RiskThresholdService;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RiskThresholdServiceImpl implements RiskThresholdService {
 
@@ -30,8 +32,32 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     }
 
     @Override
+    public RiskThreshold updateThreshold(Long id, RiskThreshold threshold) {
+
+        RiskThreshold existing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Threshold not found"));
+
+        existing.setMaxSingleStockPercentage(threshold.getMaxSingleStockPercentage());
+        existing.setMaxSectorPercentage(threshold.getMaxSectorPercentage());
+        existing.setActive(threshold.getActive());
+
+        return repository.save(existing);
+    }
+
+    @Override
     public RiskThreshold getActiveThreshold() {
         return repository.findByActiveTrue()
-                .orElseThrow(() -> new RuntimeException("No active threshold found"));
+                .orElseThrow(() -> new RuntimeException("No active threshold"));
+    }
+
+    @Override
+    public RiskThreshold getThresholdById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Threshold not found"));
+    }
+
+    @Override
+    public List<RiskThreshold> getAllThresholds() {
+        return repository.findAll();
     }
 }
