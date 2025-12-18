@@ -7,7 +7,7 @@ import jakarta.persistence.Column;
 
 @Entity
 
-public class stock{
+public class Stock{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
@@ -49,14 +49,14 @@ public Boolean getactive(){
 public void setactive(Boolean active){
   this.active=active;
 }
-public stock(Long id , String ticker, String companyName, String sector, Boolean active){
+public Stock(Long id , String ticker, String companyName, String sector, Boolean active){
  this.id=id;
  this.ticker=ticker;
  this.companyName=companyName;
  this.sector=sector;
  this.active=active;
 }
-public stock(){
+public Stock(){
 
 }
 

@@ -7,5 +7,11 @@ import java.util.List;
 @Service
 public class StockServiceImpl implements StockService{
     private final StockRepositary stockRepository;
-    public StockServiceImpl
+    public StockServiceImpl(StockRepository stockRepository){
+        this.stockRepository = stockRepository ;
+    }
+    @Override
+    public Stock updateStock(Long id, Stock stock){
+        Stock existing = stockRepository.findById(id).orElseThrow(()-> new )
+    }
 }
