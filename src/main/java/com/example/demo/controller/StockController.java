@@ -18,14 +18,13 @@ public class StockController {
         this.stockService = stockService;
     }
 
-    // Create Stock
     @PostMapping
     public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
         Stock created = stockService.createStock(stock);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    // Update Stock
+  
     @PutMapping("/{id}")
     public ResponseEntity<Stock> updateStock(
             @PathVariable Long id,
@@ -35,19 +34,17 @@ public class StockController {
         return ResponseEntity.ok(updated);
     }
 
-    // Get Stock by ID
     @GetMapping("/{id}")
     public ResponseEntity<Stock> getStockById(@PathVariable Long id) {
         return ResponseEntity.ok(stockService.getStockById(id));
     }
 
-    // Get All Stocks
     @GetMapping
     public ResponseEntity<List<Stock>> getAllStocks() {
         return ResponseEntity.ok(stockService.getAllStocks());
     }
 
-    // Deactivate Stock
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deactivateStock(@PathVariable Long id) {
         stockService.deactivateStock(id);
