@@ -19,10 +19,10 @@ public class Stock{
 
 
 
-public Long getid(){
+public Long getId(){
   return id;
 }
-public void setid(Long id){
+public void setId(Long Id){
   this.id=id;
 }
 public String getticker(){
