@@ -8,6 +8,7 @@ import com.example.demo.service.PortfolioHoldingService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
@@ -19,30 +20,49 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
     }
 
     @Override
-    public PortfolioHolding addHolding(PortfolioHolding holding) {
+    public PortfolioHolding createHolding(PortfolioHolding holding) {
 
-      
-        if (holding.getQuantity() == null || holding.getQuantity() <= 0) {
-            throw new RuntimeException("Quantity must be greater than 0");
+        if (holding.getQuantity() <= 0) {
+            throw new RuntimeException("Quantity must be > 0");
         }
 
-        
-        if (holding.getMarketValue() == null ||
-                holding.getMarketValue().compareTo(BigDecimal.ZERO) < 0) {
+        if (holding.getMarketValue().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Market value must be >= 0");
         }
 
         Stock stock = holding.getStock();
-        if (stock == null || !Boolean.TRUE.equals(stock.getActive())) {
-            throw new RuntimeException("Only active stocks can be added to portfolio");
+        if (!Boolean.TRUE.equals(stock.getActive())) {
+            throw new RuntimeException("Only active stocks allowed");
         }
 
         return repository.save(holding);
     }
 
     @Override
+    public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
+
+        PortfolioHolding existing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Holding not found"));
+
+        existing.setQuantity(holding.getQuantity());
+        existing.setMarketValue(holding.getMarketValue());
+
+        return repository.save(existing);
+    }
+
+    @Override
     public PortfolioHolding getHoldingById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Holding not found"));
+    }
+
+    @Override
+    public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
+        return repository.findByPortfolioId(portfolioId);
+    }
+
+    @Override
+    public void deleteHolding(Long id) {
+        repository.deleteById(id);
     }
 }
