@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.Stock;
 import com.example.demo.repository.StockRepository;
+import com.example.demo.service.StockService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +26,10 @@ public class StockServiceImpl implements StockService {
         Stock existing = stockRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Stock not found"));
 
-        existing.setName(stock.getName());
-        existing.setPrice(stock.getPrice());
+      
+        existing.setTicker(stock.getTicker());
+        existing.setCompanyName(stock.getCompanyName());
+        existing.setSector(stock.getSector());
 
         return stockRepository.save(existing);
     }
