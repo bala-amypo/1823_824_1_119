@@ -1,48 +1,31 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
-import com.example.demo.model.RiskAnalysisResult;
-import com.example.demo.model.RiskThreshold;
-import com.example.demo.repository.RiskAnalysisResultRepository;
-import com.example.demo.service.RiskAnalysisService;
-import com.example.demo.service.RiskThresholdService;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.RiskAnalysisResult;
+import com.example.demo.repository.RiskAnalysisResultRepository;
 
 @Service
 public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
-    private final RiskAnalysisResultRepository repository;
-    private final RiskThresholdService thresholdService;
+    private final RiskAnalysisResultRepository riskAnalysisResultRepository;
 
     public RiskAnalysisServiceImpl(
-            RiskAnalysisResultRepository repository,
-            RiskThresholdService thresholdService) {
+            RiskAnalysisResultRepository riskAnalysisResultRepository) {
 
-        this.repository = repository;
-        this.thresholdService = thresholdService;
+        this.riskAnalysisResultRepository = riskAnalysisResultRepository;
     }
 
     @Override
     public RiskAnalysisResult analyzePortfolio(Long portfolioId) {
-
-        RiskThreshold threshold = thresholdService.getActiveThreshold();
-
-        RiskAnalysisResult result = new RiskAnalysisResult();
-        result.setIsHighRisk(false);
-
-        return repository.save(result);
-    }
-
-    @Override
-    public RiskAnalysisResult getAnalysisById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Analysis not found"));
+        throw new ResourceNotFoundException("Portfolio not found");
     }
 
     @Override
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
-        return repository.findByPortfolioId(portfolioId);
+        return riskAnalysisResultRepository.findByPortfolioId(portfolioId);
     }
 }
