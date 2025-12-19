@@ -1,41 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.RiskThreshold;
-import com.example.demo.service.RiskThresholdService;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequestMapping("/risk-thresholds")
-public class RiskThresholdController {
-
-    private final RiskThresholdService service;
-
-    public RiskThresholdController(RiskThresholdService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public ResponseEntity<RiskThreshold> createThreshold(
-            @RequestBody RiskThreshold threshold) {
-
-        return new ResponseEntity<>(
-                service.createThreshold(threshold),
-                HttpStatus.CREATED
-        );
-    }
-
-    @GetMapping("/active")
-    public ResponseEntity<RiskThreshold> getActiveThreshold() {
-        return ResponseEntity.ok(service.getActiveThreshold());
-    }
-}
-package com.example.demo.controller;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,12 +27,40 @@ public class RiskThresholdController {
         this.riskThresholdService = riskThresholdService;
     }
 
-    /**
-     * GET /api/risk-thresholds/active
-     * Returns the currently active risk threshold
-     */
+    @PostMapping
+    public ResponseEntity<RiskThreshold> createThreshold(
+            @RequestBody RiskThreshold threshold) {
+
+        return ResponseEntity.ok(
+                riskThresholdService.createThreshold(threshold));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RiskThreshold> updateThreshold(
+            @PathVariable Long id,
+            @RequestBody RiskThreshold threshold) {
+
+        return ResponseEntity.ok(
+                riskThresholdService.updateThreshold(id, threshold));
+    }
+
     @GetMapping("/active")
     public ResponseEntity<RiskThreshold> getActiveThreshold() {
-        return ResponseEntity.ok(riskThresholdService.getActiveThreshold());
+        return ResponseEntity.ok(
+                riskThresholdService.getActiveThreshold());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RiskThreshold> getThresholdById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                riskThresholdService.getThresholdById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RiskThreshold>> getAllThresholds() {
+        return ResponseEntity.ok(
+                riskThresholdService.getAllThresholds());
     }
 }

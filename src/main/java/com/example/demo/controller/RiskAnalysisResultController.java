@@ -25,24 +25,24 @@ public class RiskAnalysisController {
         this.riskAnalysisService = riskAnalysisService;
     }
 
-    /**
-     * POST /api/risk-analysis/analyze/{portfolioId}
-     * Runs risk analysis for a portfolio
-     */
     @PostMapping("/analyze/{portfolioId}")
-    public ResponseEntity<RiskAnalysisResult> analyze(
+    public ResponseEntity<RiskAnalysisResult> analyzePortfolio(
             @PathVariable Long portfolioId) {
 
         return ResponseEntity.ok(
                 riskAnalysisService.analyzePortfolio(portfolioId));
     }
 
-    /**
-     * GET /api/risk-analysis/portfolio/{portfolioId}
-     * Returns all analysis results for a portfolio
-     */
+    @GetMapping("/{id}")
+    public ResponseEntity<RiskAnalysisResult> getAnalysisById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                riskAnalysisService.getAnalysisById(id));
+    }
+
     @GetMapping("/portfolio/{portfolioId}")
-    public ResponseEntity<List<RiskAnalysisResult>> getByPortfolio(
+    public ResponseEntity<List<RiskAnalysisResult>> getAnalysesForPortfolio(
             @PathVariable Long portfolioId) {
 
         return ResponseEntity.ok(
