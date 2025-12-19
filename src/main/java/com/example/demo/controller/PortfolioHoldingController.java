@@ -1,37 +1,33 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.model.PortfolioHolding;
 import com.example.demo.service.PortfolioHoldingService;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import org.springframework.web.bind.annotation.*;
-
 @RestController
-@RequestMapping("/holdings")
+@RequestMapping("/api/holdings")
 public class PortfolioHoldingController {
 
-    private final PortfolioHoldingService service;
+    private final PortfolioHoldingService portfolioHoldingService;
 
-    public PortfolioHoldingController(PortfolioHoldingService service) {
-        this.service = service;
+    public PortfolioHoldingController(PortfolioHoldingService portfolioHoldingService) {
+        this.portfolioHoldingService = portfolioHoldingService;
     }
 
     @PostMapping
-    public ResponseEntity<PortfolioHolding> addHolding(
-            @RequestBody PortfolioHolding holding) {
-
-        return new ResponseEntity<>(
-                service.addHolding(holding),
-                HttpStatus.CREATED
-        );
+    public ResponseEntity<PortfolioHolding> create(@RequestBody PortfolioHolding holding) {
+        return ResponseEntity.ok(portfolioHoldingService.createHolding(holding));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PortfolioHolding> getHoldingById(
-            @PathVariable Long id) {
+    @GetMapping("/portfolio/{portfolioId}")
+    public ResponseEntity<List<PortfolioHolding>> byPortfolio(
+            @PathVariable Long portfolioId) {
 
-        return ResponseEntity.ok(service.getHoldingById(id));
+        return ResponseEntity.ok(
+                portfolioHoldingService.getHoldingsByPortfolio(portfolioId));
     }
 }
