@@ -14,7 +14,8 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
     private final RiskAnalysisResultRepository repository;
 
-    public RiskAnalysisServiceImpl(RiskAnalysisResultRepository repository) {
+    public RiskAnalysisServiceImpl(
+            RiskAnalysisResultRepository repository) {
         this.repository = repository;
     }
 
