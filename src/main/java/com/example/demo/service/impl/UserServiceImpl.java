@@ -10,26 +10,28 @@ import com.example.demo.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repo;
+    private final UserRepository repository;
 
-    public UserServiceImpl(UserRepository repo) {
-        this.repo = repo;
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public User register(User user) {
-        return repo.save(user);
+        return repository.save(user);
     }
 
     @Override
     public User findByEmail(String email) {
-        return repo.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return repository.findByEmail(email)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
     }
 
     @Override
     public User getUserById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
     }
 }
