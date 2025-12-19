@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import java.util.List;
 
@@ -7,31 +7,41 @@ import org.springframework.stereotype.Service;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.PortfolioHolding;
 import com.example.demo.repository.PortfolioHoldingRepository;
+import com.example.demo.service.PortfolioHoldingService;
 
 @Service
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
-    private final PortfolioHoldingRepository portfolioHoldingRepository;
+    private final PortfolioHoldingRepository repository;
 
-    public PortfolioHoldingServiceImpl(
-            PortfolioHoldingRepository portfolioHoldingRepository) {
-
-        this.portfolioHoldingRepository = portfolioHoldingRepository;
+    public PortfolioHoldingServiceImpl(PortfolioHoldingRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public PortfolioHolding createHolding(PortfolioHolding holding) {
-        if (holding.getQuantity() <= 0) {
-            throw new IllegalArgumentException("Quantity must be > 0");
-        }
-        if (holding.getMarketValue().doubleValue() < 0) {
-            throw new IllegalArgumentException("Market value must be >= 0");
-        }
-        return portfolioHoldingRepository.save(holding);
+        return repository.save(holding);
+    }
+
+    @Override
+    public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
+        PortfolioHolding existing = getHoldingById(id);
+        return repository.save(existing);
+    }
+
+    @Override
+    public PortfolioHolding getHoldingById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Holding not found"));
     }
 
     @Override
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
-        return portfolioHoldingRepository.findByPortfolioId(portfolioId);
+        return repository.findByPortfolioId(portfolioId);
+    }
+
+    @Override
+    public void deleteHolding(Long id) {
+        repository.delete(getHoldingById(id));
     }
 }

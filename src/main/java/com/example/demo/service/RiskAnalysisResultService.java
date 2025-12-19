@@ -8,5 +8,7 @@ public interface RiskAnalysisService {
 
     RiskAnalysisResult analyzePortfolio(Long portfolioId);
 
+    RiskAnalysisResult getAnalysisById(Long id);
+
     List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId);
 }
