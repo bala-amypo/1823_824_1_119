@@ -12,29 +12,27 @@ import com.example.demo.service.RiskAnalysisService;
 @Service
 public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
-    private final RiskAnalysisResultRepository repository;
+    private final RiskAnalysisResultRepository repo;
 
-    public RiskAnalysisServiceImpl(
-            RiskAnalysisResultRepository repository) {
-        this.repository = repository;
+    public RiskAnalysisServiceImpl(RiskAnalysisResultRepository repo) {
+        this.repo = repo;
     }
 
     @Override
     public RiskAnalysisResult analyzePortfolio(Long portfolioId) {
-        RiskAnalysisResult result =
-                new RiskAnalysisResult(portfolioId, 0.75, "MEDIUM");
-        return repository.save(result);
+        RiskAnalysisResult r =
+                new RiskAnalysisResult(portfolioId, 0.5, "MEDIUM");
+        return repo.save(r);
     }
 
     @Override
     public RiskAnalysisResult getAnalysisById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Risk analysis not found"));
+        return repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
     }
 
     @Override
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
-        return repository.findByPortfolioId(portfolioId);
+        return repo.findByPortfolioId(portfolioId);
     }
 }
