@@ -3,70 +3,47 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-
-import com.example.demo.model.UserPortfolio;
-import com.example.demo.service.UserPortfolioService;
+import com.example.demo.model.PortfolioHolding;
+import com.example.demo.service.PortfolioHoldingService;
 
 @RestController
-@RequestMapping("/api/portfolios")
-@Tag(name = "User Portfolios")
-public class UserPortfolioController {
+@RequestMapping("/api/holdings")
+public class PortfolioHoldingController {
 
-    private final UserPortfolioService userPortfolioService;
+    private final PortfolioHoldingService service;
 
-    public UserPortfolioController(
-            UserPortfolioService userPortfolioService) {
-
-        this.userPortfolioService = userPortfolioService;
+    public PortfolioHoldingController(PortfolioHoldingService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<UserPortfolio> createPortfolio(
-            @RequestBody UserPortfolio portfolio) {
-
-        return ResponseEntity.ok(
-                userPortfolioService.createPortfolio(portfolio));
+    public ResponseEntity<PortfolioHolding> create(@RequestBody PortfolioHolding h) {
+        return ResponseEntity.ok(service.createHolding(h));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserPortfolio> updatePortfolio(
+    public ResponseEntity<PortfolioHolding> update(
             @PathVariable Long id,
-            @RequestBody UserPortfolio portfolio) {
-
-        return ResponseEntity.ok(
-                userPortfolioService.updatePortfolio(id, portfolio));
+            @RequestBody PortfolioHolding h) {
+        return ResponseEntity.ok(service.updateHolding(id, h));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserPortfolio> getPortfolioById(
-            @PathVariable Long id) {
-
-        return ResponseEntity.ok(
-                userPortfolioService.getPortfolioById(id));
+    public ResponseEntity<PortfolioHolding> get(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getHoldingById(id));
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserPortfolio>> getPortfoliosByUser(
-            @PathVariable Long userId) {
-
-        return ResponseEntity.ok(
-                userPortfolioService.getPortfoliosByUser(userId));
+    @GetMapping("/portfolio/{portfolioId}")
+    public ResponseEntity<List<PortfolioHolding>> byPortfolio(
+            @PathVariable Long portfolioId) {
+        return ResponseEntity.ok(service.getHoldingsByPortfolio(portfolioId));
     }
 
-    @PutMapping("/{id}/deactivate")
-    public ResponseEntity<Void> deactivatePortfolio(
-            @PathVariable Long id) {
-
-        userPortfolioService.deactivatePortfolio(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deleteHolding(id);
         return ResponseEntity.ok().build();
     }
 }
