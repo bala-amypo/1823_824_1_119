@@ -1,12 +1,61 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-import com.example.demo.model.User;
+@Entity
+@Table(name = "users")
+public class User {
 
-public interface UserRepository extends JpaRepository<User, Long> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    Optional<User> findByEmail(String email);
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String password;
+    private String role;
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserPortfolio> portfolios;
+
+    public User() {
+    }
+
+    public User(String email, String password, String role, LocalDateTime createdAt) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
