@@ -1,13 +1,9 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,30 +14,32 @@ public class RiskAnalysisResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserPortfolio portfolio;
-
-    private LocalDateTime analysisDate;
-
-    private Double highestStockPercentage;
-
-    private Double highestSectorPercentage;
-
-    private Boolean isHighRisk;
+    private Long portfolioId;
+    private Double riskScore;
+    private String riskLevel;
 
     public RiskAnalysisResult() {
     }
 
-    public RiskAnalysisResult(
-            UserPortfolio portfolio,
-            Double highestStockPercentage,
-            Double highestSectorPercentage,
-            Boolean isHighRisk) {
+    public RiskAnalysisResult(Long portfolioId, Double riskScore, String riskLevel) {
+        this.portfolioId = portfolioId;
+        this.riskScore = riskScore;
+        this.riskLevel = riskLevel;
+    }
 
-        this.portfolio = portfolio;
-        this.analysisDate = LocalDateTime.now();
-        this.highestStockPercentage = highestStockPercentage;
-        this.highestSectorPercentage = highestSectorPercentage;
-        this.isHighRisk = isHighRisk;
+    public Long getId() {
+        return id;
+    }
+
+    public Long getPortfolioId() {
+        return portfolioId;
+    }
+
+    public Double getRiskScore() {
+        return riskScore;
+    }
+
+    public String getRiskLevel() {
+        return riskLevel;
     }
 }

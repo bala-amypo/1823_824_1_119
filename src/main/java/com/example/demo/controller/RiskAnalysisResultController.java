@@ -9,19 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-
 import com.example.demo.model.RiskAnalysisResult;
 import com.example.demo.service.RiskAnalysisService;
 
 @RestController
 @RequestMapping("/api/risk-analysis")
-@Tag(name = "Risk Analysis")
-public class RiskAnalysisController {
+public class RiskAnalysisResultController {
 
     private final RiskAnalysisService riskAnalysisService;
 
-    public RiskAnalysisController(RiskAnalysisService riskAnalysisService) {
+    public RiskAnalysisResultController(
+            RiskAnalysisService riskAnalysisService) {
         this.riskAnalysisService = riskAnalysisService;
     }
 
