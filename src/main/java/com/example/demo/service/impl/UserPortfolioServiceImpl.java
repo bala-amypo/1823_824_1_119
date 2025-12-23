@@ -5,53 +5,62 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.PortfolioHolding;
-import com.example.demo.repository.PortfolioHoldingRepository;
-import com.example.demo.service.PortfolioHoldingService;
+import com.example.demo.model.UserPortfolio;
+import com.example.demo.repository.UserPortfolioRepository;
+import com.example.demo.service.UserPortfolioService;
 
 @Service
-public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
+public class UserPortfolioServiceImpl implements UserPortfolioService {
 
-    private final PortfolioHoldingRepository repository;
+    private final UserPortfolioRepository repository;
 
-    public PortfolioHoldingServiceImpl(PortfolioHoldingRepository repository) {
+    public UserPortfolioServiceImpl(UserPortfolioRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public PortfolioHolding createHolding(PortfolioHolding holding) {
-        return repository.save(holding);
+    public UserPortfolio createPortfolio(UserPortfolio portfolio) {
+        return repository.save(portfolio);
     }
 
     @Override
-    public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
-        PortfolioHolding existing = getHoldingById(id);
+    public UserPortfolio updatePortfolio(Long id, UserPortfolio portfolio) {
+        UserPortfolio existing = getPortfolioById(id);
 
-        if (holding.getPortfolioId() != null) {
-            existing.setPortfolioId(holding.getPortfolioId());
+        if (portfolio.getPortfolioName() != null) {
+            existing.setPortfolioName(portfolio.getPortfolioName());
         }
-        if (holding.getStockId() != null) {
-            existing.setStockId(holding.getStockId());
+        if (portfolio.getUserId() != null) {
+            existing.setUserId(portfolio.getUserId());
         }
-        if (holding.getQuantity() != null) {
-            existing.setQuantity(holding.getQuantity());
-        }
-        if (holding.getActive() != null) {
-            existing.setActive(holding.getActive());
+        if (portfolio.getActive() != null) {
+            existing.setActive(portfolio.getActive());
         }
 
         return repository.save(existing);
     }
 
     @Override
-    public PortfolioHolding getHoldingById(Long id) {
+    public UserPortfolio getPortfolioById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Holding not found"));
+                        new ResourceNotFoundException("Portfolio not found"));
     }
 
     @Override
-    public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
-        return repository.findByPortfolioId(portfolioId);
+    public List<UserPortfolio> getAllPortfolios() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<UserPortfolio> getPortfoliosByUser(Long userId) {
+        return repository.findByUserId(userId);
+    }
+
+    @Override
+    public void deactivatePortfolio(Long id) {
+        UserPortfolio portfolio = getPortfolioById(id);
+        portfolio.setActive(false);
+        repository.save(portfolio);
     }
 }
