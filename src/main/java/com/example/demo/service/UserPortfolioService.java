@@ -2,15 +2,19 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.model.PortfolioHolding;
+import com.example.demo.model.UserPortfolio;
 
-public interface PortfolioHoldingService {
+public interface UserPortfolioService {
 
-    PortfolioHolding createHolding(PortfolioHolding holding);
+    UserPortfolio createPortfolio(UserPortfolio portfolio);
 
-    PortfolioHolding updateHolding(Long id, PortfolioHolding holding);
+    UserPortfolio updatePortfolio(Long id, UserPortfolio portfolio);
 
-    PortfolioHolding getHoldingById(Long id);
+    UserPortfolio getPortfolioById(Long id);
 
-    List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId);
+    List<UserPortfolio> getAllPortfolios();
+
+    List<UserPortfolio> getPortfoliosByUser(Long userId);
+
+    void deactivatePortfolio(Long id);
 }
