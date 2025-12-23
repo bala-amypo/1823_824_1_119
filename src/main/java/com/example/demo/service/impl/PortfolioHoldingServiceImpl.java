@@ -26,13 +26,28 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
     @Override
     public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
         PortfolioHolding existing = getHoldingById(id);
+
+        if (holding.getPortfolioId() != null) {
+            existing.setPortfolioId(holding.getPortfolioId());
+        }
+        if (holding.getStockId() != null) {
+            existing.setStockId(holding.getStockId());
+        }
+        if (holding.getQuantity() != null) {
+            existing.setQuantity(holding.getQuantity());
+        }
+        if (holding.getActive() != null) {
+            existing.setActive(holding.getActive());
+        }
+
         return repository.save(existing);
     }
 
     @Override
     public PortfolioHolding getHoldingById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Holding not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Holding not found"));
     }
 
     @Override
@@ -42,6 +57,6 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
     @Override
     public void deleteHolding(Long id) {
-        repository.delete(getHoldingById(id));
+        repository.deleteById(id);
     }
 }
