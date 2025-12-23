@@ -1,14 +1,9 @@
 package com.example.demo.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,43 +14,50 @@ public class PortfolioHolding {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserPortfolio portfolio;
+    private Long portfolioId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Stock stock;
+    private Long stockId;
 
-    private Double quantity;
+    private Integer quantity;
 
-    private BigDecimal marketValue;
-
-    private LocalDateTime lastUpdated;
+    private Boolean active = true;
 
     public PortfolioHolding() {
-    }
-
-    public PortfolioHolding(
-            UserPortfolio portfolio,
-            Stock stock,
-            Double quantity,
-            BigDecimal marketValue) {
-
-        this.portfolio = portfolio;
-        this.stock = stock;
-        this.quantity = quantity;
-        this.marketValue = marketValue;
-        this.lastUpdated = LocalDateTime.now();
     }
 
     public Long getId() {
         return id;
     }
 
-    public Double getQuantity() {
+    public Long getPortfolioId() {
+        return portfolioId;
+    }
+
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
+    public Long getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(Long stockId) {
+        this.stockId = stockId;
+    }
+
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public BigDecimal getMarketValue() {
-        return marketValue;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
