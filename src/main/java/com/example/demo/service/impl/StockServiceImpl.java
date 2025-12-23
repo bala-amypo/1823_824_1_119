@@ -26,7 +26,20 @@ public class StockServiceImpl implements StockService {
     @Override
     public Stock updateStock(Long id, Stock stock) {
         Stock existing = getStockById(id);
-        existing.setActive(stock.getActive());
+
+        if (stock.getTicker() != null) {
+            existing.setTicker(stock.getTicker());
+        }
+        if (stock.getCompanyName() != null) {
+            existing.setCompanyName(stock.getCompanyName());
+        }
+        if (stock.getSector() != null) {
+            existing.setSector(stock.getSector());
+        }
+        if (stock.getActive() != null) {
+            existing.setActive(stock.getActive());
+        }
+
         return stockRepository.save(existing);
     }
 

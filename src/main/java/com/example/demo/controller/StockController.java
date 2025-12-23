@@ -28,9 +28,7 @@ public class StockController {
     }
 
     @PostMapping
-    public ResponseEntity<Stock> createStock(
-            @RequestBody Stock stock) {
-
+    public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
         return ResponseEntity.ok(stockService.createStock(stock));
     }
 
@@ -43,9 +41,7 @@ public class StockController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Stock> getStockById(
-            @PathVariable Long id) {
-
+    public ResponseEntity<Stock> getStockById(@PathVariable Long id) {
         return ResponseEntity.ok(stockService.getStockById(id));
     }
 
@@ -55,9 +51,7 @@ public class StockController {
     }
 
     @PutMapping("/{id}/deactivate")
-    public ResponseEntity<Void> deactivateStock(
-            @PathVariable Long id) {
-
+    public ResponseEntity<Void> deactivateStock(@PathVariable Long id) {
         stockService.deactivateStock(id);
         return ResponseEntity.ok().build();
     }

@@ -40,6 +40,26 @@ public class Stock {
         return ticker;
     }
 
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
     public Boolean getActive() {
         return active;
     }
