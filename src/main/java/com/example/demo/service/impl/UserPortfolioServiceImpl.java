@@ -58,4 +58,10 @@ public class UserPortfolioServiceImpl implements UserPortfolioService {
     public List<UserPortfolio> getAllPortfolios() {
         return repository.findAll();
     }
+
+   
+    @Override
+    public List<UserPortfolio> getPortfoliosByUser(Long userId) {
+        return repository.findByUserId(userId);
+    }
 }
