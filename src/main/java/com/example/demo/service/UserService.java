@@ -6,7 +6,8 @@ public interface UserService {
 
     User register(User user);
 
-    User findByEmail(String email);
+        User findByEmail(String email);
 
-    User getUserById(Long id);
-}
+            User getUserById(Long id);
+            }
+            
