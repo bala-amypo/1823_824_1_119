@@ -1,9 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Stock;
 import com.example.demo.repository.StockRepository;
@@ -11,7 +9,6 @@ import com.example.demo.service.StockService;
 
 @Service
 public class StockServiceImpl implements StockService {
-
     private final StockRepository stockRepository;
 
     public StockServiceImpl(StockRepository stockRepository) {
@@ -20,13 +17,16 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Stock createStock(Stock stock) {
+        // Check for duplicate ticker
+        if (stockRepository.findByTicker(stock.getTicker()).isPresent()) {
+            throw new RuntimeException("Stock with ticker already exists - duplicate not allowed");
+        }
         return stockRepository.save(stock);
     }
 
     @Override
     public Stock updateStock(Long id, Stock stock) {
         Stock existing = getStockById(id);
-
         if (stock.getTicker() != null) {
             existing.setTicker(stock.getTicker());
         }
@@ -39,14 +39,13 @@ public class StockServiceImpl implements StockService {
         if (stock.getActive() != null) {
             existing.setActive(stock.getActive());
         }
-
         return stockRepository.save(existing);
     }
 
     @Override
     public Stock getStockById(Long id) {
         return stockRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Stock not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Stock not found"));
     }
 
     @Override
