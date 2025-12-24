@@ -18,13 +18,13 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
     public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
+        return extractAllClaims(token).getSubject();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
@@ -33,14 +33,13 @@ public class JwtUtil {
     }
 
     private boolean isTokenExpired(String token) {
-        return extractClaims(token).getExpiration().before(new Date());
+        return extractAllClaims(token).getExpiration().before(new Date());
     }
 
-    private Claims extractClaims(String token) {
+    private Claims extractAllClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
     }
 }
-n
