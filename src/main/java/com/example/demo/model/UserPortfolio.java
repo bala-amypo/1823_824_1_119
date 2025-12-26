@@ -19,10 +19,15 @@ public class UserPortfolio {
 
     private String portfolioName;
 
+    private Long userId;
+
+    private Boolean active = true;
+
     @OneToMany(mappedBy = "portfolio")
     private List<PortfolioHolding> holdings;
 
-    public UserPortfolio() {}
+    public UserPortfolio() {
+    }
 
     public Long getId() {
         return id;
@@ -40,11 +45,5 @@ public class UserPortfolio {
         this.portfolioName = portfolioName;
     }
 
-    public List<PortfolioHolding> getHoldings() {
-        return holdings;
-    }
-
-    public void setHoldings(List<PortfolioHolding> holdings) {
-        this.holdings = holdings;
-    }
-}
+    public Long getUserId() {
+        return userI

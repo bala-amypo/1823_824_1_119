@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,5 +24,14 @@ public class JwtUtil {
 
     public Long extractUserId(String token) {
         return 1L;
+    }
+
+    
+    public String extractUsername(String token) {
+        return extractEmail(token);
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+        return validateToken(token);
     }
 }

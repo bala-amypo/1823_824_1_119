@@ -22,7 +22,8 @@ public class RiskAnalysisResult {
 
     private Timestamp analysisDate;
 
-    public RiskAnalysisResult() {}
+    public RiskAnalysisResult() {
+    }
 
     public Long getId() {
         return id;
