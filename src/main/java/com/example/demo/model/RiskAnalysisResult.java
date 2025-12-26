@@ -1,10 +1,7 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "risk_analysis_results")
@@ -14,32 +11,30 @@ public class RiskAnalysisResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long portfolioId;
-    private Double riskScore;
-    private String riskLevel;
+    private Double highestStockPercentage;
 
-    public RiskAnalysisResult() {
+    private Boolean highRisk;
+
+    private Timestamp analysisDate;
+
+    public RiskAnalysisResult() {}
+
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Double getHighestStockPercentage() { return highestStockPercentage; }
+    public void setHighestStockPercentage(Double highestStockPercentage) {
+        this.highestStockPercentage = highestStockPercentage;
     }
 
-    public RiskAnalysisResult(Long portfolioId, Double riskScore, String riskLevel) {
-        this.portfolioId = portfolioId;
-        this.riskScore = riskScore;
-        this.riskLevel = riskLevel;
+    public Boolean getHighRisk() { return highRisk; }
+    public void setHighRisk(Boolean highRisk) { this.highRisk = highRisk; }
+
+    public boolean isHighRisk() {
+        return Boolean.TRUE.equals(highRisk);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getPortfolioId() {
-        return portfolioId;
-    }
-
-    public Double getRiskScore() {
-        return riskScore;
-    }
-
-    public String getRiskLevel() {
-        return riskLevel;
-    }
+    public Timestamp getAnalysisDate() { return analysisDate; }
+    public void setAnalysisDate(Timestamp analysisDate) { this.analysisDate = analysisDate; }
 }

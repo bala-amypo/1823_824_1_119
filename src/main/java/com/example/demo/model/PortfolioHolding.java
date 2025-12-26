@@ -1,10 +1,7 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "portfolio_holdings")
@@ -14,50 +11,38 @@ public class PortfolioHolding {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long portfolioId;
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id")
+    private UserPortfolio portfolio;
 
-    private Long stockId;
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 
-    private Integer quantity;
+    private Double quantity;
+
+    private BigDecimal marketValue;
 
     private Boolean active = true;
 
-    public PortfolioHolding() {
-    }
+    public PortfolioHolding() {}
 
-    public Long getId() {
-        return id;
-    }
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getPortfolioId() {
-        return portfolioId;
-    }
+    public UserPortfolio getPortfolio() { return portfolio; }
+    public void setPortfolio(UserPortfolio portfolio) { this.portfolio = portfolio; }
 
-    public void setPortfolioId(Long portfolioId) {
-        this.portfolioId = portfolioId;
-    }
+    public Stock getStock() { return stock; }
+    public void setStock(Stock stock) { this.stock = stock; }
 
-    public Long getStockId() {
-        return stockId;
-    }
+    public Double getQuantity() { return quantity; }
+    public void setQuantity(Double quantity) { this.quantity = quantity; }
 
-    public void setStockId(Long stockId) {
-        this.stockId = stockId;
-    }
+    public BigDecimal getMarketValue() { return marketValue; }
+    public void setMarketValue(BigDecimal marketValue) { this.marketValue = marketValue; }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
