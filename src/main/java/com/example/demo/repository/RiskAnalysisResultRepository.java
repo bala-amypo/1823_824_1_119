@@ -9,5 +9,6 @@ import com.example.demo.model.RiskAnalysisResult;
 public interface RiskAnalysisResultRepository
         extends JpaRepository<RiskAnalysisResult, Long> {
 
-    List<RiskAnalysisResult> findByPortfolio_Id(Long portfolioId);
+    // ✅ Matches entity field: Long portfolioId
+    List<RiskAnalysisResult> findByPortfolioId(Long portfolioId);
 }
