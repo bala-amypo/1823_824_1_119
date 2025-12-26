@@ -84,19 +84,17 @@
             <version>2.5.0</version>
         </dependency>
 
-        <!-- Spring Boot Test (JUnit + Mockito) -->
+        <!-- Spring Boot Test (JUnit + Mockito, harmless even if unused) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
-        <!-- ✅ TestNG (REQUIRED for your tests) -->
+        <!-- ✅ TestNG (NO scope = available to main code) -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.9.0</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -110,7 +108,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- ✅ Maven Surefire for TestNG -->
+            <!-- Maven Surefire (required to run TestNG tests) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
