@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,16 +26,14 @@ public class PortfolioHolding {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    @Column
     private Double quantity;
 
-    @Column
     private BigDecimal marketValue;
 
-    @Column
     private Boolean active = true;
 
-    public PortfolioHolding() {}
+    public PortfolioHolding() {
+    }
 
     public Long getId() {
         return id;
@@ -84,5 +81,14 @@ public class PortfolioHolding {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+   
+    public Long getPortfolioId() {
+        return portfolio != null ? portfolio.getId() : null;
+    }
+
+    public Long getStockId() {
+        return stock != null ? stock.getId() : null;
     }
 }

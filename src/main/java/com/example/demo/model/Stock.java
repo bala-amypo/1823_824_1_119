@@ -22,7 +22,10 @@ public class Stock {
 
     private String sector;
 
-    public Stock() {}
+    private Boolean active = true;
+
+    public Stock() {
+    }
 
     public Long getId() {
         return id;
@@ -54,5 +57,13 @@ public class Stock {
 
     public void setSector(String sector) {
         this.sector = sector;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
