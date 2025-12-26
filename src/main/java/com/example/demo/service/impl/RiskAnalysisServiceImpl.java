@@ -1,31 +1,22 @@
 package com.example.demo.service.impl;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.RiskAnalysisResult;
+import com.example.demo.repository.RiskAnalysisResultRepository;
 import com.example.demo.service.RiskAnalysisService;
 
 @Service
 public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
-    // ---------- fields ----------
-    private Long portfolioId;
-    private double threshold;
-    private String riskLevel;
+    private final RiskAnalysisResultRepository repository;
 
-    // ---------- REQUIRED BY SPRING ----------
-    public RiskAnalysisServiceImpl() {
-    }
-
-    // ---------- REQUIRED BY TESTS / MANUAL INSTANTIATION ----------
-    public RiskAnalysisServiceImpl(Long portfolioId, double threshold, String riskLevel) {
-        this.portfolioId = portfolioId;
-        this.threshold = threshold;
-        this.riskLevel = riskLevel;
+    // ✅ Constructor injection (required by Spring)
+    public RiskAnalysisServiceImpl(RiskAnalysisResultRepository repository) {
+        this.repository = repository;
     }
 
     // ---------- INTERFACE METHOD 1 ----------
@@ -35,23 +26,19 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
         result.setHighestStockPercentage(50.0);
         result.setHighRisk(false);
         result.setAnalysisDate(new Timestamp(System.currentTimeMillis()));
-        return result;
+        return repository.save(result);
     }
 
     // ---------- INTERFACE METHOD 2 ----------
     @Override
     public RiskAnalysisResult getAnalysisById(Long id) {
-        RiskAnalysisResult result = new RiskAnalysisResult();
-        result.setId(id);
-        result.setHighestStockPercentage(40.0);
-        result.setHighRisk(false);
-        result.setAnalysisDate(new Timestamp(System.currentTimeMillis()));
-        return result;
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Risk analysis not found"));
     }
 
     // ---------- INTERFACE METHOD 3 ----------
     @Override
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
-        return new ArrayList<>();
+        return repository.findByPortfolio_Id(portfolioId);
     }
 }
