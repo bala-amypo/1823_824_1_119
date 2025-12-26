@@ -35,6 +35,8 @@ public class PortfolioHolding {
     public PortfolioHolding() {
     }
 
+    // ---------- getters & setters ----------
+
     public Long getId() {
         return id;
     }
@@ -83,12 +85,27 @@ public class PortfolioHolding {
         this.active = active;
     }
 
-   
+    // ---------- REQUIRED FOR SERVICE LAYER (FIX) ----------
+
     public Long getPortfolioId() {
         return portfolio != null ? portfolio.getId() : null;
     }
 
+    public void setPortfolioId(Long portfolioId) {
+        if (this.portfolio == null) {
+            this.portfolio = new UserPortfolio();
+        }
+        this.portfolio.setId(portfolioId);
+    }
+
     public Long getStockId() {
         return stock != null ? stock.getId() : null;
+    }
+
+    public void setStockId(Long stockId) {
+        if (this.stock == null) {
+            this.stock = new Stock();
+        }
+        this.stock.setId(stockId);
     }
 }
