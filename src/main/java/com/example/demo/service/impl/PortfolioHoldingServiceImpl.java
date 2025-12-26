@@ -86,7 +86,8 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
     @Override
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
-        return repository.findByPortfolioId(portfolioId);
+       repository.findByPortfolio_Id(portfolioId);
+
     }
 
     @Override
