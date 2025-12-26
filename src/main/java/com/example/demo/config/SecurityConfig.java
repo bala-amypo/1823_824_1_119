@@ -33,7 +33,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ✅ SINGLE PasswordEncoder bean (no duplicates)
+    // ✅ SINGLE PasswordEncoder bean
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
