@@ -46,4 +46,26 @@ public class UserPortfolio {
     }
 
     public Long getUserId() {
-        return userI
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<PortfolioHolding> getHoldings() {
+        return holdings;
+    }
+
+    public void setHoldings(List<PortfolioHolding> holdings) {
+        this.holdings = holdings;
+    }
+}
