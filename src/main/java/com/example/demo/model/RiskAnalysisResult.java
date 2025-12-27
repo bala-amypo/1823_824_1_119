@@ -11,9 +11,9 @@ public class RiskAnalysisResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "portfolio_id")
-    private UserPortfolio portfolio;
+    // 🔑 REQUIRED FOR findByPortfolioId
+    @Column(name = "portfolio_id")
+    private Long portfolioId;
 
     private Timestamp analysisDate;
 
@@ -25,34 +25,24 @@ public class RiskAnalysisResult {
 
     private String notes;
 
-    @PrePersist
-    public void onCreate() {
-        this.analysisDate = new Timestamp(System.currentTimeMillis());
-    }
-
-    /* ========= GETTERS & SETTERS ========= */
+    /* ===== GETTERS & SETTERS ===== */
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getPortfolioId() {
+        return portfolioId;
     }
 
-    public UserPortfolio getPortfolio() {
-        return portfolio;
-    }
-
-    public void setPortfolio(UserPortfolio portfolio) {
-        this.portfolio = portfolio;
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
     public Timestamp getAnalysisDate() {
         return analysisDate;
     }
 
-    // 🔴 REQUIRED FOR TEST CASES
     public void setAnalysisDate(Timestamp analysisDate) {
         this.analysisDate = analysisDate;
     }
