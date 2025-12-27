@@ -1,12 +1,9 @@
 package com.example.demo.repository;
 
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.example.demo.model.RiskThreshold;
+import org.springframework.stereotype.Repository;
 
-public interface RiskThresholdRepository extends JpaRepository<RiskThreshold, Long> {
-
-    Optional<RiskThreshold> findByActiveTrue();
+@Repository
+public interface RiskThresholdRepository {
+    RiskThreshold findByActiveTrue();
 }

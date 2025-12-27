@@ -1,10 +1,10 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.PortfolioHolding;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
-public interface PortfolioHoldingRepository extends JpaRepository<PortfolioHolding, Long> {
-
-    List<PortfolioHolding> findByPortfolio_Id(Long portfolioId);
+@Repository
+public interface PortfolioHoldingRepository {
+    List<PortfolioHolding> findByPortfolioId(Long portfolioId);
 }
