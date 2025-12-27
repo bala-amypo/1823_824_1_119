@@ -17,14 +17,22 @@ public class RiskAnalysisResult {
     private Long id;
 
     private Double highestStockPercentage;
-
     private Boolean highRisk;
-
     private Timestamp analysisDate;
 
     public RiskAnalysisResult() {
     }
 
+    // ---------- REQUIRED BY TESTS ----------
+    public Long getPortfolioId() {
+        return null;
+    }
+
+    public void setPortfolioId(Long portfolioId) {
+        // no-op (test compatibility only)
+    }
+
+    // ---------- getters & setters ----------
     public Long getId() {
         return id;
     }

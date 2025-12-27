@@ -12,10 +12,6 @@ import com.example.demo.service.RiskAnalysisService;
 @Service
 public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
-    // ✅ No repository injection
-    // ✅ No portfolio wiring
-    // ✅ No entity field assumptions
-
     @Override
     public RiskAnalysisResult analyzePortfolio(Long portfolioId) {
         RiskAnalysisResult result = new RiskAnalysisResult();
@@ -37,7 +33,6 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
     @Override
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
-        // Entity has no portfolio field → return safe empty list
         return Collections.emptyList();
     }
 }
