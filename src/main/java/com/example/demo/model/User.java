@@ -27,6 +27,8 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
+    /* ========= GETTERS & SETTERS ========= */
+
     public Long getId() {
         return id;
     }
@@ -46,7 +48,7 @@ public class User {
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -69,5 +71,10 @@ public class User {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    // 🔴 REQUIRED FOR TEST CASES
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

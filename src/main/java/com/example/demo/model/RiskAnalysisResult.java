@@ -16,18 +16,28 @@ public class RiskAnalysisResult {
     private UserPortfolio portfolio;
 
     private Timestamp analysisDate;
+
     private Double highestStockPercentage;
+
     private Double highestSectorPercentage;
+
     private boolean highRisk;
+
     private String notes;
 
     @PrePersist
     public void onCreate() {
-        analysisDate = new Timestamp(System.currentTimeMillis());
+        this.analysisDate = new Timestamp(System.currentTimeMillis());
     }
+
+    /* ========= GETTERS & SETTERS ========= */
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserPortfolio getPortfolio() {
@@ -40,6 +50,11 @@ public class RiskAnalysisResult {
 
     public Timestamp getAnalysisDate() {
         return analysisDate;
+    }
+
+    // 🔴 REQUIRED FOR TEST CASES
+    public void setAnalysisDate(Timestamp analysisDate) {
+        this.analysisDate = analysisDate;
     }
 
     public Double getHighestStockPercentage() {
@@ -69,7 +84,7 @@ public class RiskAnalysisResult {
     public String getNotes() {
         return notes;
     }
-    
+
     public void setNotes(String notes) {
         this.notes = notes;
     }
