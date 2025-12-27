@@ -16,7 +16,7 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
     @Override
     public PortfolioHolding createHolding(PortfolioHolding holding) {
-        return holdingRepository.save(holding); // ✅
+        return holdingRepository.save(holding);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
         existing.setQuantity(holding.getQuantity());
         existing.setMarketValue(holding.getMarketValue());
 
-        return holdingRepository.save(existing); // ✅
+        return holdingRepository.save(existing);
     }
 
     @Override
