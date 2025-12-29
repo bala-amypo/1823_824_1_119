@@ -10,11 +10,11 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    // 🔐 SECRET KEY (must be at least 256 bits for HS256)
+    
     private static final String SECRET_KEY =
             "mySuperSecretKeyForJwtSigning1234567890";
 
-    // ⏳ TOKEN VALIDITY (1 day)
+   
     private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
     private final Key key;
